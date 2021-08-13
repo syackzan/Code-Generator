@@ -18,33 +18,35 @@ function generatePassword(userInput) {
   var possibleCharacters = [];
   var guaranteedCharacters = [];
 
-  function randomGenerator (array){
-    var index = Math.floor(Math.random() * array.length);
+  function randomGenerator (userInput, array){
+    
+    for (var i = 0; i < userInput; i++){
+      var index = Math.floor(Math.random() * array.length);
       var call = array[index];
       guaranteedCharacters.push(call);
-      console.log(guaranteedCharacters[i]); 
+    }  
+    console.log(guaranteedCharacters);
   }
 
   if (userSpecial === true){
     possibleCharacters = possibleCharacters.concat(specialCharacters);
     console.log(possibleCharacters);
-    randomGenerator(specialCharacters);
+    randomGenerator(userInput, specialCharacters);
   } 
 
   if (userNumbers == true){
-    console.log(possibleCharacters);
     possibleCharacters = possibleCharacters.concat(numericalCharacters);
-    randomGenerator(specialCharacters);
+    console.log(possibleCharacters);
+    randomGenerator(userInput, numericalCharacters);
   }
 
   if(userUpper === true){
-    console.log(possibleCharacters);
     possibleCharacters = possibleCharacters.concat(uppercaseCharacters)
-    randomGenerator(specialCharacters);
+    console.log(possibleCharacters);
+    randomGenerator(userInput, uppercaseCharacters);
   }
   //alert("Password does not match criteria");
-  console.log(possibleCharacters);
-  console.log(guaruanteedCharacters);
+  console.log(guaranteedCharacters);
   var passarray = [];
 
   for (var i = 0; i < (userInput); i++){
@@ -54,7 +56,6 @@ function generatePassword(userInput) {
     var call = possibleCharacters[index];
     
     passarray.push(call);
-    console.log(passarray[i]) 
   }
 
   var passcontainer = passarray.join("");
