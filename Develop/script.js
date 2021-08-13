@@ -20,9 +20,25 @@ function randomGenerator (array){
   console.log(guaranteedCharacters);
 }
 
+//Comparison function to determine if there are special Characters in Final Password//
+function comparison (specialCharacters, finalPassword){
+  for (var i = 0; i < specialCharacters.length; i++){
+    for(var n = 0; n < finalPassword.length; n++){
+      if (specialCharacters[i] == finalPassword[n]){
+        return true;
+      } 
+    }
+  }
+}
+
 
 function generatePassword(userInput) {
   
+  guaranteedCharacters = [];
+  possibleCharacters = [];
+  intermediateArray = [];
+  finalPassword = [];
+
   var userSpecial = confirm("Would you like to add Special Characters?");
   var userNumbers = confirm("Would you like to add numbers?");
   var userUpper = confirm("Would you like to add Uppercase Letters?");
@@ -71,17 +87,13 @@ function generatePassword(userInput) {
   console.log(intermediateArray);
   var finalPassword = intermediateArray;
 
-  for (var i = 0; i < specialCharacters.length; i++){
-    for(var n = 0; n < specialCharacters.length; n++){
-      if (finalPassword[i] !== specialCharacters[n]){
-      alert("You need symbols within your password");
-      startCollection();
-      } else {
-        var passcontainer = finalPassword.join("");
-        console.log(passcontainer); 
-    } 
-    }
-  } 
+  if (comparison(specialCharacters, finalPassword) === true){
+    var passcontainer = finalPassword.join("");
+    console.log(passcontainer);
+  } else {
+    alert("You need symbols within your password");
+    startCollection();
+  }
   
   return passcontainer; 
 }
@@ -95,7 +107,7 @@ function writePassword(userInput) {
 }
 
 function startCollection(){
-
+  
   alert("It's Time To Generate A Password");
   var userInput = prompt("Please enter the desired length of your password");
 
