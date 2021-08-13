@@ -6,6 +6,18 @@ var specialCharacters = ["!", "@", "&", "#", "$", "%", "^", "&", "*", "(", ")", 
 var numericalCharacters = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var uppercaseCharacters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 var lowercaseCharacters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+var guaranteedCharacters = [];
+var possibleCharacters = [];
+var intermediateArray = [];
+
+//Function to pull one index from each array Character Array and Store it into Guaranteed Character Array//
+function randomGenerator (array){
+    
+  var index = Math.floor(Math.random() * array.length);
+  var call = array[index];
+  guaranteedCharacters.push(call); 
+  console.log(guaranteedCharacters);
+}
 
 
 function generatePassword(userInput) {
@@ -13,18 +25,7 @@ function generatePassword(userInput) {
   var userSpecial = confirm("Would you like to add Special Characters?");
   var userNumbers = confirm("Would you like to add numbers?");
   var userUpper = confirm("Would you like to add Uppercase Letters?");
-  //confirm("Would you like to add lowercase Letters?");
-
-  var possibleCharacters = [];
-  var guaranteedCharacters = [];
-
-  function randomGenerator (array){
-    
-    var index = Math.floor(Math.random() * array.length);
-      var call = array[index];
-      guaranteedCharacters.push(call); 
-    console.log(guaranteedCharacters);
-  }
+  var userLower = confirm("Would you like to add lowercase Letters?");
 
   if (userSpecial === true){
     possibleCharacters = possibleCharacters.concat(specialCharacters);
@@ -43,20 +44,33 @@ function generatePassword(userInput) {
     console.log(possibleCharacters);
     randomGenerator(uppercaseCharacters);
   }
-  //alert("Password does not match criteria");
-  console.log(guaranteedCharacters);
-  var passarray = [];
+
+  if(userLower === true){
+    possibleCharacters = possibleCharacters.concat(lowercaseCharacters)
+    console.log(possibleCharacters);
+    randomGenerator(lowercaseCharacters);
+  }
+  
+  //Function to pull userInput Pass#'s to intermediate array
 
   for (var i = 0; i < (userInput); i++){
-
     
     var index = Math.floor(Math.random() * possibleCharacters.length);
     var call = possibleCharacters[index];
-    
-    passarray.push(call);
+  
+    intermediateArray.push(call);
   }
+  console.log(intermediateArray);
 
-  var passcontainer = passarray.join("");
+  for (var i = 0; i < guaranteedCharacters.length; i++){
+    var replaceNum = Math.floor(Math.random() * intermediateArray.length);
+    var finalpassword = intermediateArray.splice(replaceNum, 0, guaranteedCharacters[i]);
+  }
+  
+  console.log(finalpassword);
+  
+
+  var passcontainer = finalpassword.join("");
   console.log(passcontainer);
 
   return passcontainer;
