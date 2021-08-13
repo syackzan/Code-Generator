@@ -10,13 +10,25 @@ var lowercaseCharacters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"
 
 function generatePassword(userInput) {
   
+  var userSpecial = confirm("Would you like to add Special Characters?");
+  var userNumbers = confirm("Would you like to add numbers?");
+  //confirm("Would you like to add Uppercase Letters?");
+  //confirm("Would you like to add lowercase Letters?");
+
+  if (userSpecial === true &&  userNumbers === true){
+    var userCombine = specialCharacters.concat(numericalCharacters);
+  } else {
+    alert("Password does not match criteria");
+  }
+
+  console.log(userCombine);
   var passarray = [];
 
   for (var i = 0; i < (userInput); i++){
 
     
-    var index = Math.floor(Math.random() * specialCharacters.length);
-    var call = specialCharacters[index];
+    var index = Math.floor(Math.random() * userCombine.length);
+    var call = userCombine[index];
     
     passarray.push(call);
     console.log(passarray[i])
@@ -26,12 +38,11 @@ function generatePassword(userInput) {
   var passcontainer = passarray.join("");
   console.log(passcontainer);
 
-  return passcontainer;
+  
 }
 
-function writePassword() {
-  startCollection ();
-  var password = generatePassword();
+function writePassword(userInput) {
+  var password = generatePassword(userInput);
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -51,7 +62,7 @@ function startCollection(){
     startCollection();
   } else {
     console.log("hello")
-    generatePassword(userInput);
+    writePassword(userInput);
   }  
 }
 
@@ -59,4 +70,4 @@ function startCollection(){
 
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", startCollection);
