@@ -9,6 +9,7 @@ var lowercaseCharacters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"
 var guaranteedCharacters = [];
 var possibleCharacters = [];
 var intermediateArray = [];
+var finalPassword = [];
 
 //Function to pull one index from each array Character Array and Store it into Guaranteed Character Array//
 function randomGenerator (array){
@@ -63,18 +64,26 @@ function generatePassword(userInput) {
   console.log(intermediateArray);
 
   for (var i = 0; i < guaranteedCharacters.length; i++){
-    var replaceNum = Math.floor(Math.random() * intermediateArray.length);
-    var finalpassword = intermediateArray.splice(replaceNum, 0, guaranteedCharacters[i]);
+    var n = Math.floor(Math.random() * intermediateArray.length);
+    intermediateArray.splice(n, 1, guaranteedCharacters[i]);
   }
-  
-  console.log(finalpassword);
-  
 
-  var passcontainer = finalpassword.join("");
-  console.log(passcontainer);
+  console.log(intermediateArray);
+  var finalPassword = intermediateArray;
 
-  return passcontainer;
+  for (var i = 0; i < specialCharacters.length; i++){
+    for(var n = 0; n < specialCharacters.length; n++){
+      if (finalPassword[i] !== specialCharacters[n]){
+      alert("You need symbols within your password");
+      startCollection();
+      } else {
+        var passcontainer = finalPassword.join("");
+        console.log(passcontainer); 
+    } 
+    }
+  } 
   
+  return passcontainer; 
 }
 
 function writePassword(userInput) {
