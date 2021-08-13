@@ -12,32 +12,55 @@ function generatePassword(userInput) {
   
   var userSpecial = confirm("Would you like to add Special Characters?");
   var userNumbers = confirm("Would you like to add numbers?");
-  //confirm("Would you like to add Uppercase Letters?");
+  var userUpper = confirm("Would you like to add Uppercase Letters?");
   //confirm("Would you like to add lowercase Letters?");
 
-  if (userSpecial === true &&  userNumbers === true){
-    var userCombine = specialCharacters.concat(numericalCharacters);
-  } else {
-    alert("Password does not match criteria");
+  var possibleCharacters = [];
+  var guaranteedCharacters = [];
+
+  function randomGenerator (array){
+    var index = Math.floor(Math.random() * array.length);
+      var call = array[index];
+      guaranteedCharacters.push(call);
+      console.log(guaranteedCharacters[i]); 
   }
 
-  console.log(userCombine);
+  if (userSpecial === true){
+    possibleCharacters = possibleCharacters.concat(specialCharacters);
+    console.log(possibleCharacters);
+    randomGenerator(specialCharacters);
+  } 
+
+  if (userNumbers == true){
+    console.log(possibleCharacters);
+    possibleCharacters = possibleCharacters.concat(numericalCharacters);
+    randomGenerator(specialCharacters);
+  }
+
+  if(userUpper === true){
+    console.log(possibleCharacters);
+    possibleCharacters = possibleCharacters.concat(uppercaseCharacters)
+    randomGenerator(specialCharacters);
+  }
+  //alert("Password does not match criteria");
+  console.log(possibleCharacters);
+  console.log(guaruanteedCharacters);
   var passarray = [];
 
   for (var i = 0; i < (userInput); i++){
 
     
-    var index = Math.floor(Math.random() * userCombine.length);
-    var call = userCombine[index];
+    var index = Math.floor(Math.random() * possibleCharacters.length);
+    var call = possibleCharacters[index];
     
     passarray.push(call);
-    console.log(passarray[i])
- 
+    console.log(passarray[i]) 
   }
 
   var passcontainer = passarray.join("");
   console.log(passcontainer);
 
+  return passcontainer;
   
 }
 
