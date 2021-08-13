@@ -18,32 +18,30 @@ function generatePassword(userInput) {
   var possibleCharacters = [];
   var guaranteedCharacters = [];
 
-  function randomGenerator (userInput, array){
+  function randomGenerator (array){
     
-    for (var i = 0; i < userInput; i++){
-      var index = Math.floor(Math.random() * array.length);
+    var index = Math.floor(Math.random() * array.length);
       var call = array[index];
-      guaranteedCharacters.push(call);
-    }  
+      guaranteedCharacters.push(call); 
     console.log(guaranteedCharacters);
   }
 
   if (userSpecial === true){
     possibleCharacters = possibleCharacters.concat(specialCharacters);
     console.log(possibleCharacters);
-    randomGenerator(userInput, specialCharacters);
+    randomGenerator(specialCharacters);
   } 
 
   if (userNumbers == true){
     possibleCharacters = possibleCharacters.concat(numericalCharacters);
     console.log(possibleCharacters);
-    randomGenerator(userInput, numericalCharacters);
+    randomGenerator(numericalCharacters);
   }
 
   if(userUpper === true){
     possibleCharacters = possibleCharacters.concat(uppercaseCharacters)
     console.log(possibleCharacters);
-    randomGenerator(userInput, uppercaseCharacters);
+    randomGenerator(uppercaseCharacters);
   }
   //alert("Password does not match criteria");
   console.log(guaranteedCharacters);
